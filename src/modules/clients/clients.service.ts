@@ -7,9 +7,11 @@ import { IClient } from './interface/client.interface';
 export class ClientsService {
   constructor(@InjectModel('client') private clientSchema: Model<IClient>) {}
   async getAll(): Promise<IClient[]> {
-    return this.clientSchema.find();
+    return await this.clientSchema.find();
   }
-  async getByID() {}
+  async getByID(id): Promise<IClient> {
+    return await this.clientSchema.findById(id);
+  }
   async createClient() {}
   async patchClient() {}
   async putClient() {}
