@@ -10,7 +10,7 @@ export class ClientsService {
   async getAll(): Promise<IClient[]> {
     return await this.clientSchema.find();
   }
-  async getByID(id): Promise<IClient> {
+  async getByID(id: string): Promise<IClient> {
     return await this.clientSchema.findById(id);
   }
   async createClient(client: ClientDTO): Promise<IClient> {
@@ -19,5 +19,7 @@ export class ClientsService {
   }
   async patchClient() {}
   async putClient() {}
-  async deleteClient() {}
+  async deleteClient(id: string) {
+    return await this.clientSchema.findOneAndDelete({ _id: id });
+  }
 }
