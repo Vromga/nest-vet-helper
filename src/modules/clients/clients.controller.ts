@@ -1,6 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { IClient } from './interface/client.interface';
+import { ClientDTO } from './DTO/client.dto';
 
 @Controller('clients')
 export class ClientsController {
@@ -14,5 +15,10 @@ export class ClientsController {
   @Get('/:id')
   async getClientByID(@Param('id') id: string): Promise<IClient> {
     return await this.cs.getByID(id);
+  }
+
+  @Post()
+  async createClient(@Body() clientDto: ClientDTO): Promise<IClient> {
+    return await this.cs.createClient(clientDto);
   }
 }

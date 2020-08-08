@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { IClient } from './interface/client.interface';
+import { ClientDTO } from './DTO/client.dto';
 
 @Injectable()
 export class ClientsService {
@@ -12,7 +13,10 @@ export class ClientsService {
   async getByID(id): Promise<IClient> {
     return await this.clientSchema.findById(id);
   }
-  async createClient() {}
+  async createClient(client: ClientDTO): Promise<IClient> {
+    const newClient = new this.clientSchema({ ...client });
+    return await newClient.save();
+  }
   async patchClient() {}
   async putClient() {}
   async deleteClient() {}
