@@ -1,4 +1,6 @@
-export interface IClient {
+import { Document } from 'mongoose';
+
+export interface IClient extends Document {
   readonly name: string;
   readonly surname: string;
   readonly patronymic: string;
