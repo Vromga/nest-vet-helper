@@ -1,5 +1,7 @@
-export interface IPets {
-  clientId: string;
+import { Document } from 'mongoose';
+
+export interface IPets extends Document {
+  ownerId: string;
   name: string;
   age: string;
   kindOfAnimal: string;
@@ -9,4 +11,5 @@ export interface IPets {
   gender: string;
   weightAnimal: number;
   description: string;
+  isLive: boolean;
 }
