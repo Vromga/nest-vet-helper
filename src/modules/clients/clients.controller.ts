@@ -1,7 +1,16 @@
-import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Delete,
+  Patch,
+} from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { IClient } from './interface/client.interface';
 import { ClientDTO } from './DTO/client.dto';
+import { ClientDescriptionOnlyDTO } from './DTO/clientDescriptionOnly.dto';
 
 @Controller('clients')
 export class ClientsController {
@@ -25,5 +34,13 @@ export class ClientsController {
   @Delete('/:id')
   async deleteClient(@Param('id') id: string) {
     return this.cs.deleteClient(id);
+  }
+
+  @Patch('/:id')
+  async updateClientDescription(
+    @Param('id') id: string,
+    @Body() clientDTO: ClientDescriptionOnlyDTO,
+  ) {
+    return this.cs.patchClient(id, clientDTO);
   }
 }
