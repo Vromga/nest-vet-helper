@@ -23,7 +23,11 @@ export class ClientsService {
       new: true,
     });
   }
-  async putClient() {}
+  async putClient(id: string, body: ClientDTO) {
+    return await this.clientSchema.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+  }
   async deleteClient(id: string) {
     return await this.clientSchema.findOneAndDelete({ _id: id });
   }

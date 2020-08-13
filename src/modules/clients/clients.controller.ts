@@ -6,6 +6,7 @@ import {
   Body,
   Delete,
   Patch,
+  Put,
 } from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { IClient } from './interface/client.interface';
@@ -42,5 +43,14 @@ export class ClientsController {
     @Body() clientDTO: ClientDescriptionOnlyDTO,
   ) {
     return this.cs.patchClient(id, clientDTO);
+  }
+
+  @Put('/:id')
+  async updateClient(
+    @Param('id') id: string,
+    @Body() clientDTO: ClientDTO,
+  ): Promise<IClient> {
+    console.log('work');
+    return this.cs.putClient(id, clientDTO);
   }
 }
