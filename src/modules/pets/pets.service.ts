@@ -10,9 +10,11 @@ export class PetsService {
   constructor(@InjectModel('pets') private ps: Model<IPets>) {}
 
   async getAllPets(): Promise<IPets[]> {
-    return this.ps.find();
+    return await this.ps.find();
   }
-  async getPetById(id: string) {}
+  async getPetById(id: string): Promise<IPets> {
+    return await this.ps.findById(id);
+  }
   async getAllPetsByIdOwner(idOwner: string) {}
   async createPet(idOwner: string, petInfo: IPets) {}
   async deleteAllPetsByIdOwner(idOwner: string) {}
