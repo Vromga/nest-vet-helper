@@ -15,7 +15,9 @@ export class PetsService {
   async getPetById(id: string): Promise<IPets> {
     return await this.ps.findById(id);
   }
-  async getAllPetsByIdOwner(idOwner: string) {}
+  async getAllPetsByIdOwner(idOwner: string): Promise<IPets[]> {
+    return await this.ps.find({ clientId: idOwner });
+  }
   async createPet(idOwner: string, petInfo: IPets) {}
   async deleteAllPetsByIdOwner(idOwner: string) {}
   async deletePetById(id: string) {}

@@ -15,4 +15,9 @@ export class PetsController {
   async getPetsById(@Param('id') id: string): Promise<IPets> {
     return await this.ps.getPetById(id);
   }
+
+  @Get('/owner/:id')
+  async getAllPetsByIdOwner(@Param('id') id: string): Promise<IPets[]> {
+    return await this.ps.getAllPetsByIdOwner(id);
+  }
 }
