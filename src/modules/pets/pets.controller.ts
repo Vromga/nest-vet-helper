@@ -1,4 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { PetsService } from './pets.service';
+import { Controller, Get } from '@nestjs/common';
 
-@Controller('clients')
-export class PetsController {}
+@Controller('pets')
+export class PetsController {
+  constructor(private ps: PetsService) {}
+
+  @Get()
+  async getAllPets() {
+    return await this.ps.getAllPets();
+  }
+}

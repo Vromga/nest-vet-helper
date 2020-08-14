@@ -9,7 +9,9 @@ import { PetDTO } from './DTO/pet.dto';
 export class PetsService {
   constructor(@InjectModel('pets') private ps: Model<IPets>) {}
 
-  async getAllPets() {}
+  async getAllPets(): Promise<IPets[]> {
+    return this.ps.find();
+  }
   async getPetById(id: string) {}
   async getAllPetsByIdOwner(idOwner: string) {}
   async createPet(idOwner: string, petInfo: IPets) {}
