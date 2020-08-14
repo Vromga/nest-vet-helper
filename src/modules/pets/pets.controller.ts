@@ -1,6 +1,6 @@
 import { PetDTO } from './DTO/pet.dto';
 import { PetsService } from './pets.service';
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
 import { IPets } from './interface/pets.interface';
 
 @Controller('pets')
@@ -25,5 +25,10 @@ export class PetsController {
   @Post()
   async createPet(@Body() petInfo: PetDTO): Promise<IPets> {
     return this.ps.createPet(petInfo);
+  }
+
+  @Delete('/:id')
+  async deletePetsById(@Param('id') id: string) {
+    return this.deletePetsById(id);
   }
 }
