@@ -25,7 +25,9 @@ export class PetsService {
   async deleteAllPetsByIdOwner(ownerId: string) {
     return await this.ps.deleteMany({ ownerId });
   }
-  async deletePetById(id: string) {}
+  async deletePetById(id: string) {
+    return (await this.ps.deleteOne({ _id: id })).ok;
+  }
   async patchPetDescription(id: string, description: PetDescriptionOnlyDTO) {}
   async updatePet(id: string, petInfo: PetDTO) {}
 }

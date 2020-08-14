@@ -29,6 +29,6 @@ export class PetsController {
 
   @Delete('/:id')
   async deletePetsById(@Param('id') id: string) {
-    return this.deletePetsById(id);
+    return this.ps.deletePetById(id);
   }
 }
