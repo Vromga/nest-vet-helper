@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 
 const PetsSchemas = new Schema({
-  clientId: { type: String, required: true },
+  ownerId: { type: String, required: true },
   name: { type: String, required: true },
   age: { type: String, required: true },
   kindOfAnimal: { type: String, required: true },
