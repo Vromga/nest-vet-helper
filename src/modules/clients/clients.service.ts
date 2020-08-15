@@ -32,8 +32,14 @@ export class ClientsService {
       new: true,
     });
   }
-  async deleteClient(id: string) {
+  async deleteClient(id: string): Promise<IClient | boolean> {
     const deleteClient = await this.clientSchema.findOneAndDelete({ _id: id });
-    const deletePets = await this.petsService.deleteAllPetsByIdOwner(id);
+    if (deleteClient) {
+      const deletePets = (await this.petsService.deleteAllPetsByIdOwner(id)).ok;
+      if (deletePets) {
+        return deleteClient;
+      }
+    }
+    return false;
   }
 }
