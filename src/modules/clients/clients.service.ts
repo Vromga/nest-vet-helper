@@ -4,10 +4,14 @@ import { Model } from 'mongoose';
 import { IClient } from './interface/client.interface';
 import { ClientDTO } from './DTO/client.dto';
 import { ClientDescriptionOnlyDTO } from './DTO/clientDescriptionOnly.dto';
+import { PetsService } from '../pets/pets.service';
 
 @Injectable()
 export class ClientsService {
-  constructor(@InjectModel('client') private clientSchema: Model<IClient>) {}
+  constructor(
+    @InjectModel('client') private clientSchema: Model<IClient>,
+    private petsService: PetsService,
+  ) {}
   async getAll(): Promise<IClient[]> {
     return await this.clientSchema.find();
   }
@@ -28,7 +32,14 @@ export class ClientsService {
       new: true,
     });
   }
-  async deleteClient(id: string) {
-    return await this.clientSchema.findOneAndDelete({ _id: id });
+  async deleteClient(id: string): Promise<IClient | boolean> {
+    const deleteClient = await this.clientSchema.findOneAndDelete({ _id: id });
+    if (deleteClient) {
+      const deletePets = (await this.petsService.deleteAllPetsByIdOwner(id)).ok;
+      if (deletePets) {
+        return deleteClient;
+      }
+    }
+    return false;
   }
 }
