@@ -1,4 +1,4 @@
-import { PetDescriptionOnlyDTO } from './DTO/petDescriptionOnly.dto';
+import { PetDescriptionAndIsLiveDTO } from './DTO/petDescriptionAndIsLive.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { IPets } from './interface/pets.interface';
@@ -28,6 +28,13 @@ export class PetsService {
   async deletePetById(id: string) {
     return (await this.ps.deleteOne({ _id: id })).ok;
   }
-  async patchPetDescription(id: string, description: PetDescriptionOnlyDTO) {}
+  async patchPetDescriptionAndIsLive(
+    id: string,
+    body: PetDescriptionAndIsLiveDTO,
+  ): Promise<IPets> {
+    return this.ps.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+  }
   async updatePet(id: string, petInfo: PetDTO) {}
 }

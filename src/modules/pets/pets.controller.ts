@@ -1,6 +1,15 @@
+import { PetDescriptionAndIsLiveDTO } from './DTO/petDescriptionAndIsLive.dto';
 import { PetDTO } from './DTO/pet.dto';
 import { PetsService } from './pets.service';
-import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Delete,
+  Patch,
+} from '@nestjs/common';
 import { IPets } from './interface/pets.interface';
 
 @Controller('pets')
@@ -30,5 +39,13 @@ export class PetsController {
   @Delete('/:id')
   async deletePetsById(@Param('id') id: string) {
     return this.ps.deletePetById(id);
+  }
+
+  @Patch('/:id')
+  async updatePropertiesDescriptionAndIsLive(
+    @Param('id') id: string,
+    @Body() body: PetDescriptionAndIsLiveDTO,
+  ): Promise<IPets> {
+    return this.ps.patchPetDescriptionAndIsLive(id, body);
   }
 }

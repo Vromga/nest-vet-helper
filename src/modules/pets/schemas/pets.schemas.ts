@@ -11,6 +11,7 @@ const PetsSchemas = new Schema({
   gender: { type: String, required: true },
   weightAnimal: { type: Number, required: false },
   description: { type: String, required: false },
+  isLive: { type: Boolean, required: true },
 });
 
 export default PetsSchemas;
