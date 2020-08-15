@@ -9,6 +9,7 @@ import {
   Body,
   Delete,
   Patch,
+  Put,
 } from '@nestjs/common';
 import { IPets } from './interface/pets.interface';
 
@@ -47,5 +48,13 @@ export class PetsController {
     @Body() body: PetDescriptionAndIsLiveDTO,
   ): Promise<IPets> {
     return this.ps.patchPetDescriptionAndIsLive(id, body);
+  }
+
+  @Put('/:id')
+  async updatePet(
+    @Param('id') id: string,
+    @Body() body: PetDTO,
+  ): Promise<IPets> {
+    return this.ps.updatePet(id, body);
   }
 }

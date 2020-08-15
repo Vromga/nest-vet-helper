@@ -50,7 +50,6 @@ export class ClientsController {
     @Param('id') id: string,
     @Body() clientDTO: ClientDTO,
   ): Promise<IClient> {
-    console.log('work');
     return this.cs.putClient(id, clientDTO);
   }
 }

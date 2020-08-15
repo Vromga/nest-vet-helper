@@ -36,5 +36,9 @@ export class PetsService {
       new: true,
     });
   }
-  async updatePet(id: string, petInfo: PetDTO) {}
+  async updatePet(id: string, petInfo: PetDTO): Promise<IPets> {
+    return this.ps.findByIdAndUpdate(id, petInfo, {
+      new: true,
+    });
+  }
 }
