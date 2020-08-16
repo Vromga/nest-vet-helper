@@ -5,6 +5,7 @@ import configuration from '../configuration';
 
 import { ClientsModule } from './modules/clients/clients.module';
 import { PetsModule } from './modules/pets/pets.module';
+import { BreedsModule } from './modules/breeds/breeds.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { PetsModule } from './modules/pets/pets.module';
     ),
     ClientsModule,
     PetsModule,
+    BreedsModule,
   ],
   controllers: [],
   providers: [],
