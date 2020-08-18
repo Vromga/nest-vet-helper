@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Patch } from '@nestjs/common';
 import { BreedsService } from './breeds.service';
 import { IBreed } from './interface/breed.interface';
 import { BreedDTO } from './DTO/breed.dto';
@@ -19,5 +19,13 @@ export class BreedsController {
   @Post()
   async createNewCollectin(@Body() breedCollection: BreedDTO): Promise<IBreed> {
     return this.bs.creeteBreedCollection(breedCollection);
+  }
+
+  @Patch('/:name')
+  async addNewBreedInCollection(
+    @Param('name') name: string,
+    @Body('breed') breed: string,
+  ) {
+    return await this.bs.addNewBreedInCollection(name, breed);
   }
 }

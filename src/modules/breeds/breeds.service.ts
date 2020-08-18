@@ -17,6 +17,14 @@ export class BreedsService {
 
   async creeteBreedCollection(breedCollection: BreedDTO): Promise<IBreed> {
     const newBreedCollection = new this.bs(breedCollection);
-    return newBreedCollection.save();
+    return await newBreedCollection.save();
+  }
+
+  async addNewBreedInCollection(nameCollectionBreed: string, newBreed: string) {
+    return await this.bs.findOneAndUpdate(
+      { name: nameCollectionBreed },
+      { $push: { breed: newBreed } },
+      { new: true },
+    );
   }
 }
