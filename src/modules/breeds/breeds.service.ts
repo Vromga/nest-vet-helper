@@ -15,8 +15,8 @@ export class BreedsService {
     return await this.bs.findOne({ name });
   }
 
-  async creeteBreedCollection(breed: BreedDTO): Promise<IBreed> {
-    const newBreedCollection = new this.bs(breed);
+  async creeteBreedCollection(breedCollection: BreedDTO): Promise<IBreed> {
+    const newBreedCollection = new this.bs(breedCollection);
     return newBreedCollection.save();
   }
 }
