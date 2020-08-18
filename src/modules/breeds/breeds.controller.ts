@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Post, Body, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Patch,
+  Delete,
+} from '@nestjs/common';
 import { BreedsService } from './breeds.service';
 import { IBreed } from './interface/breed.interface';
 import { BreedDTO } from './DTO/breed.dto';
@@ -25,7 +33,12 @@ export class BreedsController {
   async addNewBreedInCollection(
     @Param('name') name: string,
     @Body('breed') breed: string,
-  ) {
+  ): Promise<IBreed> {
     return await this.bs.addNewBreedInCollection(name, breed);
+  }
+
+  @Delete('/:name')
+  async deleteCollection(@Param('name') name: string): Promise<IBreed> {
+    return await this.bs.deleteCollection(name);
   }
 }

@@ -20,11 +20,18 @@ export class BreedsService {
     return await newBreedCollection.save();
   }
 
-  async addNewBreedInCollection(nameCollectionBreed: string, newBreed: string) {
+  async addNewBreedInCollection(
+    nameCollectionBreed: string,
+    newBreed: string,
+  ): Promise<IBreed> {
     return await this.bs.findOneAndUpdate(
       { name: nameCollectionBreed },
       { $push: { breed: newBreed } },
       { new: true },
     );
+  }
+
+  async deleteCollection(name: string): Promise<IBreed> {
+    return this.bs.findOneAndDelete({ name });
   }
 }
