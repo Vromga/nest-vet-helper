@@ -6,6 +6,8 @@ import {
   Body,
   Patch,
   Delete,
+  Put,
+  Query,
 } from '@nestjs/common';
 import { BreedsService } from './breeds.service';
 import { IBreed } from './interface/breed.interface';
@@ -40,5 +42,13 @@ export class BreedsController {
   @Delete('/:name')
   async deleteCollection(@Param('name') name: string): Promise<IBreed> {
     return await this.bs.deleteCollection(name);
+  }
+
+  @Put('/:name')
+  async deleteBreedFromCollection(
+    @Param('name') name: string,
+    @Query('breed') breed: string,
+  ): Promise<IBreed> {
+    return await this.bs.deleteBreedFromCollection(name, breed);
   }
 }

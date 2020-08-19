@@ -34,4 +34,15 @@ export class BreedsService {
   async deleteCollection(name: string): Promise<IBreed> {
     return this.bs.findOneAndDelete({ name });
   }
+
+  async deleteBreedFromCollection(
+    name: string,
+    breed: string,
+  ): Promise<IBreed> {
+    return await this.bs.findOneAndUpdate(
+      { name },
+      { $pull: { breed } },
+      { new: true },
+    );
+  }
 }
