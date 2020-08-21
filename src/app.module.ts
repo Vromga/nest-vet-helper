@@ -6,9 +6,11 @@ import configuration from '../configuration';
 import { ClientsModule } from './modules/clients/clients.module';
 import { PetsModule } from './modules/pets/pets.module';
 import { BreedsModule } from './modules/breeds/breeds.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     ConfigModule.forRoot({
       load: [configuration],
     }),
