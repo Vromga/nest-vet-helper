@@ -10,6 +10,7 @@ import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     ConfigModule.forRoot({
       load: [configuration],
     }),
@@ -28,7 +29,6 @@ import { AuthModule } from './modules/auth/auth.module';
     ClientsModule,
     PetsModule,
     BreedsModule,
-    AuthModule,
   ],
   controllers: [],
   providers: [],
