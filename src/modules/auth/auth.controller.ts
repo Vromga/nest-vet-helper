@@ -1,14 +1,18 @@
-import { Controller, Request, Post, UseGuards, Get } from '@nestjs/common';
+import {
+  Controller,
+  Request,
+  Post,
+  UseGuards,
+  Get,
+  Body,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './services/auth.service';
-import { AdminRepository } from '../admin/services/admin.repository';
+import { adminDTO } from '../auth/DTO/admin.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private authService: AuthService,
-    private adminRepository: AdminRepository,
-  ) {}
+  constructor(private authService: AuthService) {}
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Request() req) {
@@ -24,7 +28,12 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt'))
   @Post('refresh')
   async refresh(@Request() req) {
-    const admin = await this.adminRepository.find(req.user.id);
+    const admin = await this.authService.findById(req.user.id);
     return this.authService.login(admin);
+  }
+
+  @Post('registration')
+  async createAdmin(@Body() adminDto: adminDTO) {
+    return await this.authService.createAdmin(adminDto);
   }
 }
